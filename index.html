@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 16</title>
+  </head>
+  <body>
+    <script>
+      function getFibonacci() {
+        const cache = new Map();
+
+        return function* (num) {
+          const values = [0, 1];
+
+          if (cache.has(num)) {
+            yield cache.get(num);
+          }
+
+          for (let i = 2; i < num; i++) {
+            const newNumber =
+              values[values.length - 2] + values[values.length - 1];
+            values.push(newNumber);
+          }
+
+          cache.set(num, values);
+
+          return values;
+        };
+      }
+
+      const fibo = getFibonacci();
+      console.log(fibo(15).next());
+      console.log(fibo(15).next());
+      console.log(fibo(16).next());
+    </script>
+  </body>
+</html>
